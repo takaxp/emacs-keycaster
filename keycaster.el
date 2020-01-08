@@ -294,9 +294,9 @@ See `set-face-attribute' help for details."
         (window-min-width 0)
         (window-min-height 0)
         (frame (aref keycaster--frames i)))
-    (fit-frame-to-buffer frame nil 0 nil 0)
-    ;; (set-frame-width frame (string-width string))
-    ))
+    (if (eq window-system 'ns)
+        (set-frame-width frame (string-width string))
+      (fit-frame-to-buffer frame nil 0 nil 0))))
 
 (defsubst keycaster--shift-frame-string ()
   (let ((n (min keycaster--nactives (1- keycaster-frames-maxnum))))
